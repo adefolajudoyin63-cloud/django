@@ -1,441 +1,43 @@
 {% extends "django_project/base.html" %}
-<<<<<<< HEAD
-{% block content %}
-    <!-- Main Container -->
-=======
 
-{% block title %}Aesthetic Journal{% endblock %}
-
-{% block extra_css %}
-      .container {
-        max-width: 960px;
-        margin: 0 auto;
-        padding: 4rem 2rem 6rem;
-      }
-
-      .content-grid {
-        display: grid;
-        grid-template-columns: 1fr 280px;
-        gap: 4.5rem;
-      }
-
-      .posts-feed {
-        display: flex;
-        flex-direction: column;
-        gap: 3rem;
-      }
-
-      .post-card {
-        background: var(--card-bg);
-        border: 1px solid var(--border-color);
-        padding: 3rem;
-        border-radius: 20px;
-        -webkit-backdrop-filter: blur(12px);
-        backdrop-filter: blur(12px);
-        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        position: relative;
-        overflow: hidden;
-      }
-
-      .post-card::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 1px;
-        background: linear-gradient(
-          90deg,
-          transparent,
-          var(--accent),
-          transparent
-        );
-        opacity: 0;
-        transition: opacity 0.4s ease;
-      }
-
-      .post-card:hover {
-        background: var(--card-hover-bg);
-        border-color: var(--border-hover);
-        transform: translateY(-4px);
-        box-shadow:
-          0 20px 40px rgba(0, 0, 0, 0.4),
-          0 0 30px var(--accent-glow);
-      }
-
-      .post-card:hover::before {
-        opacity: 1;
-      }
-
-      .post-headline-row {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-        gap: 1rem;
-        margin-bottom: 1rem;
-      }
-
-      .post-card h2 {
-        font-family: var(--font-display);
-        font-size: 2.4rem;
-        line-height: 1.25;
-        font-weight: 400;
-        margin-bottom: 0;
-        color: var(--text-primary);
-        letter-spacing: 0.5px;
-        flex: 1;
-      }
-
-      .post-card .btn-edit {
-        margin-top: 0.4rem;
-      }
-
-      .post-meta {
-        font-size: 0.8rem;
-        color: var(--text-muted);
-        display: flex;
-        gap: 0.6rem;
-        align-items: center;
-        margin-bottom: 1.5rem;
-        text-transform: uppercase;
-        letter-spacing: 1.5px;
-      }
-
-      .post-meta .author {
-        color: var(--accent);
-        font-weight: 600;
-      }
-
-      .post-meta .dot {
-        font-size: 0.5rem;
-        opacity: 0.4;
-      }
-
-      .post-body {
-        font-size: 0.95rem;
-        color: var(--text-muted);
-        font-weight: 300;
-        line-height: 1.8;
-        margin-bottom: 2rem;
-      }
-
-      .post-footer {
-        display: flex;
-        align-items: center;
-        gap: 1.25rem;
-      }
-
-      .read-more,
-      .btn-delete {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.75rem;
-        font-size: 0.75rem;
-        font-weight: 600;
-        letter-spacing: 2px;
-        text-transform: uppercase;
-        color: var(--text-primary);
-        padding: 0.6rem 1.2rem;
-        border-radius: 30px;
-        background: rgba(255, 255, 255, 0.04);
-        border: 1px solid var(--border-color);
-        transition: all 0.3s ease;
-      }
-
-      .btn-delete {
-        font-family: inherit;
-        line-height: inherit;
-        cursor: pointer;
-        appearance: none;
-        -webkit-appearance: none;
-      }
-
-      .read-more .arrow,
-      .btn-delete .arrow {
-        font-size: 1rem;
-        line-height: 1;
-        transition: transform 0.3s ease;
-      }
-
-      .read-more:hover {
-        background: var(--accent);
-        color: #0d0d0f;
-        border-color: var(--accent);
-        box-shadow: 0 0 15px var(--accent-glow);
-      }
-
-      .read-more:hover .arrow {
-        transform: translateX(4px);
-      }
-
-      .btn-delete:hover {
-        background: #c25953;
-        color: #0d0d0f;
-        border-color: #c25953;
-        box-shadow: 0 0 15px rgba(194, 89, 83, 0.35);
-        transform: translateY(-1px);
-      }
-
-      .empty-feed {
-        color: var(--text-muted);
-        font-style: italic;
-        padding: 2rem 0;
-      }
-
-      .delete-modal[hidden] {
-        display: none;
-      }
-
-      .delete-modal {
-        position: fixed;
-        inset: 0;
-        z-index: 40;
-        display: grid;
-        place-items: center;
-        padding: 1.5rem;
-      }
-
-      .delete-modal-backdrop {
-        position: absolute;
-        inset: 0;
-        background: rgba(8, 8, 10, 0.72);
-        -webkit-backdrop-filter: blur(8px);
-        backdrop-filter: blur(8px);
-      }
-
-      .delete-modal-card {
-        position: relative;
-        width: min(440px, 100%);
-        background: #161618;
-        border: 1px solid var(--border-color);
-        border-radius: 20px;
-        padding: 2.4rem 2.2rem 2rem;
-        box-shadow:
-          0 24px 60px rgba(0, 0, 0, 0.5),
-          0 0 30px var(--accent-glow);
-      }
-
-      .delete-modal-card::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 1.5rem;
-        right: 1.5rem;
-        height: 1px;
-        background: linear-gradient(90deg, transparent, #c25953, transparent);
-      }
-
-      .delete-modal-kicker {
-        font-size: 0.72rem;
-        letter-spacing: 2px;
-        text-transform: uppercase;
-        color: #c25953;
-        font-weight: 600;
-        margin-bottom: 0.55rem;
-      }
-
-      .delete-modal-card h2 {
-        font-family: var(--font-display);
-        font-size: 2.5rem;
-        font-weight: 400;
-        line-height: 1.15;
-        letter-spacing: 0.4px;
-        margin-bottom: 0.75rem;
-      }
-
-      .delete-modal-copy {
-        color: var(--text-muted);
-        font-weight: 300;
-        font-size: 0.95rem;
-        margin-bottom: 1.8rem;
-      }
-
-      .delete-modal-copy strong {
-        color: var(--text-primary);
-        font-weight: 500;
-      }
-
-      .delete-modal-actions {
-        display: flex;
-        justify-content: flex-end;
-        gap: 0.75rem;
-      }
-
-      .delete-modal-cancel,
-      .delete-modal-confirm {
-        font-family: inherit;
-        font-size: 0.75rem;
-        font-weight: 600;
-        letter-spacing: 2px;
-        text-transform: uppercase;
-        border-radius: 30px;
-        padding: 0.7rem 1.3rem;
-        cursor: pointer;
-      }
-
-      .delete-modal-cancel {
-        background: transparent;
-        color: var(--text-muted);
-        border: 1px solid var(--border-color);
-      }
-
-      .delete-modal-cancel:hover {
-        color: var(--text-primary);
-        border-color: var(--border-hover);
-      }
-
-      .delete-modal-confirm {
-        background: #c25953;
-        color: #0d0d0f;
-        border: 1px solid #c25953;
-      }
-
-      .delete-modal-confirm:hover {
-        box-shadow: 0 0 15px rgba(194, 89, 83, 0.35);
-      }
-
-      body.modal-open {
-        overflow: hidden;
-      }
-
-      .sidebar {
-        display: flex;
-        flex-direction: column;
-        gap: 3rem;
-      }
-
-      .widget-title {
-        font-family: var(--font-display);
-        font-size: 1.4rem;
-        letter-spacing: 1px;
-        margin-bottom: 1.2rem;
-        padding-bottom: 0.5rem;
-        border-bottom: 1px solid var(--border-color);
-        color: var(--text-primary);
-      }
-
-      .about-widget p {
-        font-size: 0.875rem;
-        color: var(--text-muted);
-        font-weight: 300;
-        line-height: 1.8;
-      }
-
-      .newsletter-widget p {
-        font-size: 0.85rem;
-        color: var(--text-muted);
-        margin-bottom: 1.25rem;
-        font-weight: 300;
-      }
-
-      .newsletter-form input {
-        width: 100%;
-        padding: 0.9rem 1.1rem;
-        background: rgba(255, 255, 255, 0.03);
-        border: 1px solid var(--border-color);
-        border-radius: 12px;
-        font-family: inherit;
-        font-size: 0.85rem;
-        color: var(--text-primary);
-        margin-bottom: 0.75rem;
-        outline: none;
-        transition: all 0.3s ease;
-      }
-
-      .newsletter-form input:focus {
-        border-color: var(--accent);
-        background: rgba(255, 255, 255, 0.06);
-      }
-
-      .newsletter-form button {
-        width: 100%;
-        padding: 0.9rem;
-        background: var(--accent);
-        color: #0d0d0f;
-        border: none;
-        border-radius: 12px;
-        font-size: 0.75rem;
-        letter-spacing: 2px;
-        text-transform: uppercase;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.3s ease;
-      }
-
-      .newsletter-form button:hover {
-        opacity: 0.9;
-        box-shadow: 0 0 20px var(--accent-glow);
-      }
-
-      @media (max-width: 800px) {
-        .content-grid {
-          grid-template-columns: 1fr;
-          gap: 4rem;
-        }
-
-        .post-card {
-          padding: 2rem;
-        }
-
-        .post-card h2 {
-          font-size: 1.9rem;
-        }
-      }
-{% endblock %}
+{% block title %}Lumen Journal{% endblock %}
 
 {% block content %}
->>>>>>> e3eaeebe311e669b2f75d19251302ed3ddb1d217
     <div class="container">
       <div class="content-grid">
         <main class="posts-feed">
           {% for blog in blogs %}
-          <article class="post-card">
-<<<<<<< HEAD
-            <!-- 1. Headline -->
-            <h2><a href="{% url 'article' blog.pk %}">{{ blog.headline }}</a></h2>
-  {{blog.id}}
-            <!-- 2 & 3. Author & Published At -->
-=======
-            <div class="post-headline-row">
-              <h2><a href="{% url 'article' blog.pk %}">{{ blog.headline }}</a></h2>
-              {% if user == blog.author %}
-              <a href="{% url 'edit_blog' blog.pk %}" class="btn-edit">Edit</a>
-              {% endif %}
-            </div>
->>>>>>> e3eaeebe311e669b2f75d19251302ed3ddb1d217
-            <div class="post-meta">
-              <span class="author">{{ blog.author }}</span>
-              <span class="dot">•</span>
-              <time datetime="{{ blog.published_at }}">
-                {{ blog.published_at }}
-              </time>
-            </div>
-<<<<<<< HEAD
+            <article class="post-card">
+              <div class="post-headline-row">
+                <h2><a href="{% url 'article' blog.pk %}">{{ blog.headline }}</a></h2>
+                {% if user == blog.author %}
+                  <a href="{% url 'edit_blog' blog.pk %}" class="btn-edit">Edit</a>
+                {% endif %}
+              </div>
 
-            <!-- 4. Body Excerpt -->
-            <div class="post-body">
-              <p>{{ blog.body | truncatechars:140}}</p>
-            </div>
+              <div class="post-meta">
+                <span class="author">{{ blog.author }}</span>
+                <span class="dot">•</span>
+                <time datetime="{{ blog.published_at }}">{{ blog.published_at }}</time>
+              </div>
 
-            <!-- Read More Link -->
-  <div class="post-footer">
-              {% comment %} <a href="article/{{blog.pk}}" class="read-more"> {% endcomment %}
-=======
-            <div class="post-body"> <p>{{ blog.body|truncatechars:140 }}</p></div>
-            <div class="post-footer">
->>>>>>> e3eaeebe311e669b2f75d19251302ed3ddb1d217
-              <a href="{% url 'article' blog.pk %}" class="read-more">
-                Read Essay <span class="arrow">→</span>
-              </a>
-              {% comment %} if the user is the author of the blog, show the delete button {% endcomment %}
-              {% if user == blog.author %} 
-              <form class="delete-form" action="{% url 'delete_blog' blog.pk %}" method="post" data-title="{{ blog.headline }}">
-                {% csrf_token %}
-                <button type="button" class="btn-delete">Delete <span class="arrow">×</span></button>
-              </form>
-              {% endif %}
-            </div>
-          </article>
+              <div class="post-body">
+                <p>{{ blog.body|truncatechars:140 }}</p>
+              </div>
+
+              <div class="post-footer">
+                <a href="{% url 'article' blog.pk %}" class="read-more">
+                  Read Essay <span class="arrow">→</span>
+                </a>
+
+                {% if user == blog.author %}
+                  <form class="delete-form" action="{% url 'delete_blog' blog.pk %}" method="post" data-title="{{ blog.headline }}">
+                    {% csrf_token %}
+                    <button type="button" class="btn-delete">Delete <span class="arrow">×</span></button>
+                  </form>
+                {% endif %}
+              </div>
+            </article>
           {% empty %}
             <p class="empty-feed">No essays published yet.</p>
           {% endfor %}
@@ -452,9 +54,7 @@
 
           <div class="widget newsletter-widget">
             <h3 class="widget-title">Dispatch</h3>
-            <p>
-              Subtle thoughts delivered straight to your inbox every fortnight.
-            </p>
+            <p>Subtle thoughts delivered straight to your inbox every fortnight.</p>
             <form class="newsletter-form" onsubmit="event.preventDefault()">
               <input type="email" placeholder="Your email address" required />
               <button type="submit">Subscribe</button>
@@ -463,11 +63,7 @@
         </aside>
       </div>
     </div>
-{% endblock %}
 
-<<<<<<< HEAD
- 
-=======
     <div class="delete-modal" id="delete-modal" hidden>
       <div class="delete-modal-backdrop" data-delete-close></div>
       <div class="delete-modal-card" role="dialog" aria-modal="true" aria-labelledby="delete-modal-title">
@@ -529,4 +125,3 @@
       })();
     </script>
 {% endblock %}
->>>>>>> e3eaeebe311e669b2f75d19251302ed3ddb1d217

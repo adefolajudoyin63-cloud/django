@@ -1,51 +1,18 @@
-<<<<<<< HEAD
-<!doctype html>
-=======
 <!DOCTYPE html>
->>>>>>> e3eaeebe311e669b2f75d19251302ed3ddb1d217
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<<<<<<< HEAD
-    <title>Aesthetic Journal</title>
-
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Italiana&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap"
-=======
     <title>{% block title %}Lumen{% endblock %}</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Italiana&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap"
->>>>>>> e3eaeebe311e669b2f75d19251302ed3ddb1d217
+      href="https://fonts.googleapis.com/css2?family=Italiana&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
 
     <style>
-<<<<<<< HEAD
-      /* --- Color Palette & Variables --- */
-      :root {
-        --bg-color: #0d0d0f;
-        /* Deep obsidian dark background */
-        --card-bg: rgba(255, 255, 255, 0.03);
-        /* Translucent glass card background */
-        --card-hover-bg: rgba(255, 255, 255, 0.05);
-        --text-primary: #e8e6e1;
-        /* Soft champagne light text */
-        --text-muted: #949086;
-        /* Warm muted grey */
-        --accent: #d4a373;
-        /* Muted gold / Champagne accent */
-        --accent-glow: rgba(212, 163, 115, 0.15);
-        --border-color: rgba(255, 255, 255, 0.07);
-        --border-hover: rgba(212, 163, 115, 0.35);
-
-=======
       :root {
         --bg-color: #0d0d0f;
         --card-bg: rgba(255, 255, 255, 0.03);
@@ -56,7 +23,6 @@
         --accent-glow: rgba(212, 163, 115, 0.15);
         --border-color: rgba(255, 255, 255, 0.07);
         --border-hover: rgba(212, 163, 115, 0.35);
->>>>>>> e3eaeebe311e669b2f75d19251302ed3ddb1d217
         --font-display: "Italiana", serif;
         --font-sans: "Plus Jakarta Sans", sans-serif;
       }
@@ -74,23 +40,11 @@
         line-height: 1.8;
         -webkit-font-smoothing: antialiased;
         min-height: 100vh;
-<<<<<<< HEAD
-        /* Ambient background glowing orbs */
-=======
         display: flex;
         flex-direction: column;
->>>>>>> e3eaeebe311e669b2f75d19251302ed3ddb1d217
         background-image:
-          radial-gradient(
-            circle at 15% 20%,
-            rgba(212, 163, 115, 0.06) 0%,
-            transparent 45%
-          ),
-          radial-gradient(
-            circle at 85% 80%,
-            rgba(138, 100, 70, 0.05) 0%,
-            transparent 50%
-          );
+          radial-gradient(circle at 15% 20%, rgba(212, 163, 115, 0.06) 0%, transparent 45%),
+          radial-gradient(circle at 85% 80%, rgba(138, 100, 70, 0.05) 0%, transparent 50%);
         background-attachment: fixed;
       }
 
@@ -100,19 +54,11 @@
         transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
       }
 
-<<<<<<< HEAD
-      /* --- Stylish Header --- */
-      .header {
-        max-width: 960px;
-        margin: 0 auto;
-        padding: 4rem 2rem 3rem;
-=======
       .header {
         max-width: 960px;
         width: 100%;
         margin: 0 auto;
         padding: 4rem 2rem 2rem;
->>>>>>> e3eaeebe311e669b2f75d19251302ed3ddb1d217
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -128,48 +74,48 @@
 
       .nav-links {
         display: flex;
-        gap: 2.5rem;
+        align-items: center;
+        gap: 2rem;
         list-style: none;
       }
 
-      .nav-links a {
-        font-size: 0.8rem;
-        color: var(--text-muted);
-        letter-spacing: 2px;
-        text-transform: uppercase;
-        font-weight: 500;
-      }
-
-      .nav-links a:hover {
-        color: var(--accent);
-      }
-
-<<<<<<< HEAD
+      .nav-links a,
       .nav-links button {
-=======
-      .nav-links .btn-logout {
-        background: none;
-        border: none;
-        padding: 0;
->>>>>>> e3eaeebe311e669b2f75d19251302ed3ddb1d217
-        font-family: inherit;
         font-size: 0.8rem;
         color: var(--text-muted);
         letter-spacing: 2px;
         text-transform: uppercase;
         font-weight: 500;
-<<<<<<< HEAD
         background: none;
         border: none;
-        padding: 0;
+        font-family: inherit;
         cursor: pointer;
       }
 
+      .nav-links a:hover,
       .nav-links button:hover {
         color: var(--accent);
       }
 
-      /* --- Container --- */
+      .nav-logout-form {
+        display: inline;
+        margin: 0;
+      }
+
+      .site-content {
+        flex: 1;
+      }
+
+      .footer {
+        text-align: center;
+        padding: 4rem 1.5rem;
+        border-top: 1px solid var(--border-color);
+        font-size: 0.8rem;
+        color: var(--text-muted);
+        letter-spacing: 1px;
+        font-weight: 300;
+      }
+
       .container {
         max-width: 960px;
         margin: 0 auto;
@@ -182,7 +128,6 @@
         gap: 4.5rem;
       }
 
-      /* --- Blog Feed --- */
       .posts-feed {
         display: flex;
         flex-direction: column;
@@ -194,16 +139,13 @@
         border: 1px solid var(--border-color);
         padding: 3rem;
         border-radius: 20px;
-
         -webkit-backdrop-filter: blur(12px);
         backdrop-filter: blur(12px);
-
         transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         position: relative;
         overflow: hidden;
       }
 
-      /* Subtle glow line at top of cards on hover */
       .post-card::before {
         content: "";
         position: absolute;
@@ -211,12 +153,7 @@
         left: 0;
         right: 0;
         height: 1px;
-        background: linear-gradient(
-          90deg,
-          transparent,
-          var(--accent),
-          transparent
-        );
+        background: linear-gradient(90deg, transparent, var(--accent), transparent);
         opacity: 0;
         transition: opacity 0.4s ease;
       }
@@ -225,28 +162,39 @@
         background: var(--card-hover-bg);
         border-color: var(--border-hover);
         transform: translateY(-4px);
-        box-shadow:
-          0 20px 40px rgba(0, 0, 0, 0.4),
-          0 0 30px var(--accent-glow);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 30px var(--accent-glow);
       }
 
       .post-card:hover::before {
         opacity: 1;
       }
 
-      /* Headline */
-      .post-card h2 {
+      .post-headline-row,
+      .article-title-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 1rem;
+        margin-bottom: 1rem;
+      }
+
+      .post-card h2,
+      .article-title {
         font-family: var(--font-display);
-        font-size: 2.4rem;
         line-height: 1.25;
         font-weight: 400;
-        margin-bottom: 1rem;
         color: var(--text-primary);
         letter-spacing: 0.5px;
       }
 
-      /* Author & Published At Meta */
-      .post-meta {
+      .post-card h2 {
+        font-size: 2.4rem;
+        margin-bottom: 0;
+        flex: 1;
+      }
+
+      .post-meta,
+      .article-meta {
         font-size: 0.8rem;
         color: var(--text-muted);
         display: flex;
@@ -257,18 +205,14 @@
         letter-spacing: 1.5px;
       }
 
-      .post-meta .author {
+      .post-meta .author,
+      .article-meta .author {
         color: var(--accent);
         font-weight: 600;
       }
 
-      .post-meta .dot {
-        font-size: 0.5rem;
-        opacity: 0.4;
-      }
-
-      /* Body Excerpt */
-      .post-body {
+      .post-body,
+      .article-body {
         font-size: 0.95rem;
         color: var(--text-muted);
         font-weight: 300;
@@ -276,40 +220,24 @@
         margin-bottom: 2rem;
       }
 
-      /* Read More Button */
       .post-footer {
         display: flex;
         align-items: center;
         gap: 1.25rem;
       }
 
-      .read-more, .btn-delete {
+      .read-more,
+      .btn-delete,
+      .btn-edit,
+      .btn-publish,
+      .action-btn {
         display: inline-flex;
         align-items: center;
         gap: 0.75rem;
-=======
-        cursor: pointer;
-      }
-
-      .nav-links .btn-logout:hover {
-        color: var(--accent);
-      }
-
-      .site-content {
-        flex: 1;
-      }
-
-      .btn-edit {
-        flex-shrink: 0;
-        display: inline-flex;
-        align-items: center;
->>>>>>> e3eaeebe311e669b2f75d19251302ed3ddb1d217
         font-size: 0.75rem;
         font-weight: 600;
         letter-spacing: 2px;
         text-transform: uppercase;
-<<<<<<< HEAD
-        color: var(--text-primary);
         padding: 0.6rem 1.2rem;
         border-radius: 30px;
         background: rgba(255, 255, 255, 0.04);
@@ -317,43 +245,40 @@
         transition: all 0.3s ease;
       }
 
-      .read-more .arrow {
-        font-size: 1rem;
-        transition: transform 0.3s ease;
+      .read-more {
+        color: var(--text-primary);
       }
 
-      .post-card:hover .read-more {
-=======
+      .btn-edit {
         color: var(--accent);
-        padding: 0.5rem 1.1rem;
-        border-radius: 30px;
-        background: rgba(255, 255, 255, 0.04);
-        border: 1px solid var(--border-color);
+        flex-shrink: 0;
       }
 
-      .btn-edit:hover {
->>>>>>> e3eaeebe311e669b2f75d19251302ed3ddb1d217
+      .btn-delete {
+        color: var(--text-primary);
+        font-family: inherit;
+        line-height: inherit;
+        cursor: pointer;
+        appearance: none;
+        -webkit-appearance: none;
+      }
+
+      .read-more:hover,
+      .btn-edit:hover,
+      .btn-publish:hover,
+      .action-btn:hover {
         background: var(--accent);
         color: #0d0d0f;
         border-color: var(--accent);
         box-shadow: 0 0 15px var(--accent-glow);
       }
 
-<<<<<<< HEAD
-      .post-card:hover .read-more .arrow {
-        transform: translateX(4px);
+      .btn-delete:hover {
+        background: #c25953;
+        color: #0d0d0f;
+        border-color: #c25953;
+        box-shadow: 0 0 15px rgba(194, 89, 83, 0.35);
       }
-
-
-/* Card*/
-.post-card:hover .btn-delete {
-background: #c25953;
-  color: #0d0d0f;
-  border-color: #c25953;
-  box-shadow: 0 0 15px rgba(194, 89, 83, 0.35);
-  transform: translateY(-1px);
-}
-
 
       .empty-feed {
         color: var(--text-muted);
@@ -361,7 +286,6 @@ background: #c25953;
         padding: 2rem 0;
       }
 
-      /* --- Sidebar Widgets --- */
       .sidebar {
         display: flex;
         flex-direction: column;
@@ -378,25 +302,48 @@ background: #c25953;
         color: var(--text-primary);
       }
 
-      .about-widget p {
+      .about-widget p,
+      .newsletter-widget p {
         font-size: 0.875rem;
         color: var(--text-muted);
         font-weight: 300;
         line-height: 1.8;
       }
 
-      .newsletter-widget p {
-        font-size: 0.85rem;
-        color: var(--text-muted);
-        margin-bottom: 1.25rem;
-        font-weight: 300;
-      }
-
       .newsletter-form input {
         width: 100%;
         padding: 0.9rem 1.1rem;
-=======
-      .create-container {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        font-family: inherit;
+        font-size: 0.85rem;
+        color: var(--text-primary);
+        margin-bottom: 0.75rem;
+        outline: none;
+      }
+
+      .newsletter-form input:focus {
+        border-color: var(--accent);
+        background: rgba(255, 255, 255, 0.06);
+      }
+
+      .newsletter-form button {
+        width: 100%;
+        padding: 0.9rem;
+        background: var(--accent);
+        color: #0d0d0f;
+        border: none;
+        border-radius: 12px;
+        font-size: 0.75rem;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        font-weight: 600;
+        cursor: pointer;
+      }
+
+      .create-container,
+      .article-container {
         max-width: 800px;
         margin: 0 auto;
         padding: 3rem 2rem 6rem;
@@ -417,7 +364,8 @@ background: #c25953;
         font-weight: 300;
       }
 
-      .editor-card {
+      .editor-card,
+      .delete-modal-card {
         background: var(--card-bg);
         border: 1px solid var(--border-color);
         padding: 3rem;
@@ -425,7 +373,6 @@ background: #c25953;
         -webkit-backdrop-filter: blur(12px);
         backdrop-filter: blur(12px);
         box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-        position: relative;
       }
 
       .editor-form {
@@ -438,12 +385,6 @@ background: #c25953;
         display: flex;
         flex-direction: column;
         gap: 0.6rem;
-      }
-
-      .form-row {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 2rem;
       }
 
       label {
@@ -460,37 +401,16 @@ background: #c25953;
       textarea {
         width: 100%;
         padding: 1rem 1.2rem;
->>>>>>> e3eaeebe311e669b2f75d19251302ed3ddb1d217
         background: rgba(255, 255, 255, 0.03);
         border: 1px solid var(--border-color);
         border-radius: 12px;
         font-family: inherit;
-<<<<<<< HEAD
-        font-size: 0.85rem;
-        color: var(--text-primary);
-        margin-bottom: 0.75rem;
-=======
         font-size: 0.95rem;
         color: var(--text-primary);
->>>>>>> e3eaeebe311e669b2f75d19251302ed3ddb1d217
         outline: none;
         transition: all 0.3s ease;
       }
 
-<<<<<<< HEAD
-      .newsletter-form input:focus {
-        border-color: var(--accent);
-        background: rgba(255, 255, 255, 0.06);
-      }
-
-      .newsletter-form button {
-        width: 100%;
-        padding: 0.9rem;
-        background: var(--accent);
-        color: #0d0d0f;
-        border: none;
-        border-radius: 12px;
-=======
       input[type="text"]:focus,
       input[type="date"]:focus,
       input[type="email"]:focus,
@@ -500,22 +420,11 @@ background: #c25953;
         box-shadow: 0 0 15px var(--accent-glow);
       }
 
-      input.title-input {
-        font-family: var(--font-display);
-        font-size: 1.6rem;
-        letter-spacing: 0.5px;
-      }
-
       textarea {
         min-height: 250px;
         resize: vertical;
         line-height: 1.8;
         font-weight: 300;
-      }
-
-      input[type="date"]::-webkit-calendar-picker-indicator {
-        filter: invert(0.8);
-        cursor: pointer;
       }
 
       .form-actions {
@@ -539,128 +448,160 @@ background: #c25953;
         color: var(--text-primary);
       }
 
-      .btn-publish,
-      .action-btn {
+      .back-link {
         display: inline-flex;
         align-items: center;
-        gap: 0.75rem;
-        padding: 0.9rem 2rem;
-        background: var(--accent);
-        color: #0d0d0f;
-        border: none;
-        border-radius: 30px;
->>>>>>> e3eaeebe311e669b2f75d19251302ed3ddb1d217
+        gap: 0.6rem;
         font-size: 0.75rem;
         letter-spacing: 2px;
         text-transform: uppercase;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.3s ease;
-<<<<<<< HEAD
-      }
-
-      .newsletter-form button:hover {
-        opacity: 0.9;
-        box-shadow: 0 0 20px var(--accent-glow);
-      }
-
-      /* --- Footer --- */
-=======
-        box-shadow: 0 0 15px var(--accent-glow);
-      }
-
-      .btn-publish:hover,
-      .action-btn:hover {
-        opacity: 0.9;
-        transform: translateY(-2px);
-        box-shadow: 0 0 25px var(--accent-glow);
-      }
-
-      .btn-publish .arrow {
-        font-size: 1rem;
-        transition: transform 0.3s ease;
-      }
-
-      .btn-publish:hover .arrow {
-        transform: translateX(4px);
-      }
-
->>>>>>> e3eaeebe311e669b2f75d19251302ed3ddb1d217
-      .footer {
-        text-align: center;
-        padding: 4rem 1.5rem;
-        border-top: 1px solid var(--border-color);
-        font-size: 0.8rem;
         color: var(--text-muted);
-        letter-spacing: 1px;
-        font-weight: 300;
+        margin-bottom: 3rem;
+        font-weight: 500;
       }
 
-<<<<<<< HEAD
-      /* --- Responsive Design --- */
+      .back-link:hover {
+        color: var(--accent);
+      }
+
+      .article-header {
+        margin-bottom: 3rem;
+        border-bottom: 1px solid var(--border-color);
+        padding-bottom: 2.5rem;
+      }
+
+      .article-title {
+        font-size: 3.2rem;
+        margin-bottom: 0;
+        flex: 1;
+      }
+
+      .article-body p::first-letter {
+        font-family: var(--font-display);
+        font-size: 3.5rem;
+        float: left;
+        line-height: 0.8;
+        margin-right: 0.8rem;
+        margin-top: 0.2rem;
+        color: var(--accent);
+      }
+
+      .article-body blockquote {
+        font-family: var(--font-display);
+        font-size: 1.8rem;
+        line-height: 1.35;
+        color: var(--accent);
+        border-left: 1px solid var(--accent);
+        padding-left: 2rem;
+        margin: 2rem 0;
+        font-style: italic;
+      }
+
+      .delete-modal[hidden] {
+        display: none;
+      }
+
+      .delete-modal {
+        position: fixed;
+        inset: 0;
+        z-index: 40;
+        display: grid;
+        place-items: center;
+        padding: 1.5rem;
+      }
+
+      .delete-modal-backdrop {
+        position: absolute;
+        inset: 0;
+        background: rgba(8, 8, 10, 0.72);
+        -webkit-backdrop-filter: blur(8px);
+        backdrop-filter: blur(8px);
+      }
+
+      .delete-modal-card {
+        position: relative;
+        width: min(440px, 100%);
+        background: #161618;
+      }
+
+      .delete-modal-kicker {
+        font-size: 0.72rem;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: #c25953;
+        font-weight: 600;
+        margin-bottom: 0.55rem;
+      }
+
+      .delete-modal-card h2 {
+        font-family: var(--font-display);
+        font-size: 2.5rem;
+        font-weight: 400;
+        line-height: 1.15;
+        letter-spacing: 0.4px;
+        margin-bottom: 0.75rem;
+      }
+
+      .delete-modal-copy {
+        color: var(--text-muted);
+        font-weight: 300;
+        font-size: 0.95rem;
+        margin-bottom: 1.8rem;
+      }
+
+      .delete-modal-actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: 0.75rem;
+      }
+
+      .delete-modal-cancel,
+      .delete-modal-confirm {
+        font-family: inherit;
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        border-radius: 30px;
+        padding: 0.7rem 1.3rem;
+        cursor: pointer;
+      }
+
+      .delete-modal-cancel {
+        background: transparent;
+        color: var(--text-muted);
+        border: 1px solid var(--border-color);
+      }
+
+      .delete-modal-confirm {
+        background: #c25953;
+        color: #0d0d0f;
+        border: 1px solid #c25953;
+      }
+
+      body.modal-open {
+        overflow: hidden;
+      }
+
       @media (max-width: 800px) {
         .content-grid {
           grid-template-columns: 1fr;
           gap: 4rem;
         }
 
-        .post-card {
+        .header {
+          padding-top: 2.5rem;
+        }
+
+        .post-card,
+        .editor-card,
+        .delete-modal-card {
           padding: 2rem;
         }
 
-        .post-card h2 {
+        .post-card h2,
+        .article-title {
           font-size: 1.9rem;
-        }
-
-        .header {
-          padding-top: 2.5rem;
-        }
-      }
-
-
-    </style>
-  </head>
-
-  <body>
-<header class="header">
-      <a href="{% url 'home' %}" class="brand">LUMEN.</a>
-      <ul class="nav-links">
-        {% if user.is_authenticated %}
-        <li><a href="{% url 'home' %}">Essays</a></li>
-        <li><a href="{% url 'profile' %}">Profile</a></li>
-        <li><a href="{% url 'create_blog' %}">create</a></li>
-        <form method='post' action="{% url 'logout' %}" style="display: inline;margin: 0;">
-          {% csrf_token %}
-          <button type="submit">Logout</button>
-        </form>
-        {% else %}
-        <li><a href="{% url 'login' %}">Login</a></1i>
-        <li><a href="{% url 'register' %}">Register</a></li>
-        {% endif %}
-
-      </ul>
-    </header>
-
-    {% block content %} {% endblock %}
-    <!-- Footer -->
-    <footer class="footer">
-      <p>&copy; 2026 LUMEN JOURNAL. ALL RIGHTS RESERVED.</p>
-=======
-      @media (max-width: 768px) {
-        .header {
-          padding-top: 2.5rem;
-        }
-
-        .form-row {
-          grid-template-columns: 1fr;
-        }
-
-        .editor-card {
-          padding: 2rem;
-        }
-
-        .page-title {
-          font-size: 2.2rem;
         }
       }
 
@@ -672,17 +613,16 @@ background: #c25953;
       <a href="{% url 'home' %}" class="brand">LUMEN.</a>
       <ul class="nav-links">
         <li><a href="{% url 'about' %}">About</a></li>
-        {% if user.is_authenticated %} 
-        {% comment %} if the user is authenticated, show the write and logout buttons {% endcomment %}
-        <li><a href="{% url 'my_blogs' %}">My Blogs</a></li>
+        {% if user.is_authenticated %}
+          <li><a href="{% url 'my_blogs' %}">My Blogs</a></li>
           <li><a href="{% url 'create_blog' %}">Write</a></li>
-          <li><form action="{% url 'logout' %}" method="post">
-            {% csrf_token %}
-            <button type="submit" class="btn-logout">Log out</button>
-          </form></li>
-        {% else %} 
-        
-        {% comment %} if the user is not authenticated, show the login and sign up buttons {% endcomment %}
+          <li>
+            <form action="{% url 'logout' %}" method="post" class="nav-logout-form">
+              {% csrf_token %}
+              <button type="submit">Log out</button>
+            </form>
+          </li>
+        {% else %}
           <li><a href="{% url 'login' %}">Log in</a></li>
           <li><a href="{% url 'signup' %}">Sign up</a></li>
         {% endif %}
@@ -694,8 +634,7 @@ background: #c25953;
     </div>
 
     <footer class="footer">
-      <p>&copy; 2026 <a href="https://www.lumenjournal.com" target="_blank">Lumen Journal</a>. ALL RIGHTS RESERVED.</p>
->>>>>>> e3eaeebe311e669b2f75d19251302ed3ddb1d217
+      <p>&copy; 2026 Lumen Journal. All rights reserved.</p>
     </footer>
   </body>
 </html>
