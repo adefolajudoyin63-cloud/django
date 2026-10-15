@@ -1,3 +1,5 @@
 blog_venv/*
 class.py
 tempCodeRunner.py
+.env
+data.json
