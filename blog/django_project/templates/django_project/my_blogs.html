@@ -1,0 +1,431 @@
+{% extends "django_project/base.html" %}
+
+{% block title %}My Blogs — Lumen{% endblock %}
+
+{% block extra_css %}
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 3rem 2rem 6rem;
+      }
+
+      .page-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        gap: 1.5rem;
+        margin-bottom: 2.5rem;
+      }
+
+      .page-header .page-subtitle {
+        margin-bottom: 0;
+      }
+
+      .posts-feed {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+      }
+
+      .post-card {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        padding: 2.4rem;
+        border-radius: 20px;
+        -webkit-backdrop-filter: blur(12px);
+        backdrop-filter: blur(12px);
+        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .post-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          var(--accent),
+          transparent
+        );
+        opacity: 0;
+        transition: opacity 0.4s ease;
+      }
+
+      .post-card:hover {
+        background: var(--card-hover-bg);
+        border-color: var(--border-hover);
+        transform: translateY(-4px);
+        box-shadow:
+          0 20px 40px rgba(0, 0, 0, 0.4),
+          0 0 30px var(--accent-glow);
+      }
+
+      .post-card:hover::before {
+        opacity: 1;
+      }
+
+      .post-headline-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 1rem;
+        margin-bottom: 1rem;
+      }
+
+      .post-card h2 {
+        font-family: var(--font-display);
+        font-size: 2.2rem;
+        line-height: 1.25;
+        font-weight: 400;
+        margin-bottom: 0;
+        color: var(--text-primary);
+        letter-spacing: 0.5px;
+        flex: 1;
+      }
+
+      .post-meta {
+        font-size: 0.8rem;
+        color: var(--text-muted);
+        display: flex;
+        gap: 0.6rem;
+        align-items: center;
+        margin-bottom: 1.5rem;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+      }
+
+      .post-meta .author {
+        color: var(--accent);
+        font-weight: 600;
+      }
+
+      .post-meta .dot {
+        font-size: 0.5rem;
+        opacity: 0.4;
+      }
+
+      .post-body {
+        font-size: 0.95rem;
+        color: var(--text-muted);
+        font-weight: 300;
+        line-height: 1.8;
+        margin-bottom: 2rem;
+      }
+
+      .post-footer {
+        display: flex;
+        align-items: center;
+        gap: 1.25rem;
+      }
+
+      .read-more,
+      .btn-delete {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.75rem;
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--text-primary);
+        padding: 0.6rem 1.2rem;
+        border-radius: 30px;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid var(--border-color);
+        transition: all 0.3s ease;
+      }
+
+      .btn-delete {
+        font-family: inherit;
+        line-height: inherit;
+        cursor: pointer;
+        appearance: none;
+        -webkit-appearance: none;
+      }
+
+      .read-more .arrow,
+      .btn-delete .arrow {
+        font-size: 1rem;
+        line-height: 1;
+        transition: transform 0.3s ease;
+      }
+
+      .read-more:hover {
+        background: var(--accent);
+        color: #0d0d0f;
+        border-color: var(--accent);
+        box-shadow: 0 0 15px var(--accent-glow);
+      }
+
+      .read-more:hover .arrow {
+        transform: translateX(4px);
+      }
+
+      .btn-delete:hover {
+        background: #c25953;
+        color: #0d0d0f;
+        border-color: #c25953;
+        box-shadow: 0 0 15px rgba(194, 89, 83, 0.35);
+        transform: translateY(-1px);
+      }
+
+      .empty-feed {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 20px;
+        padding: 3rem 2rem;
+        text-align: center;
+      }
+
+      .empty-feed p {
+        color: var(--text-muted);
+        font-weight: 300;
+        margin-bottom: 1.5rem;
+      }
+
+      .delete-modal[hidden] {
+        display: none;
+      }
+
+      .delete-modal {
+        position: fixed;
+        inset: 0;
+        z-index: 40;
+        display: grid;
+        place-items: center;
+        padding: 1.5rem;
+      }
+
+      .delete-modal-backdrop {
+        position: absolute;
+        inset: 0;
+        background: rgba(8, 8, 10, 0.72);
+        -webkit-backdrop-filter: blur(8px);
+        backdrop-filter: blur(8px);
+      }
+
+      .delete-modal-card {
+        position: relative;
+        width: min(440px, 100%);
+        background: #161618;
+        border: 1px solid var(--border-color);
+        border-radius: 20px;
+        padding: 2.4rem 2.2rem 2rem;
+        box-shadow:
+          0 24px 60px rgba(0, 0, 0, 0.5),
+          0 0 30px var(--accent-glow);
+      }
+
+      .delete-modal-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 1.5rem;
+        right: 1.5rem;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, #c25953, transparent);
+      }
+
+      .delete-modal-kicker {
+        font-size: 0.72rem;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: #c25953;
+        font-weight: 600;
+        margin-bottom: 0.55rem;
+      }
+
+      .delete-modal-card h2 {
+        font-family: var(--font-display);
+        font-size: 2.5rem;
+        font-weight: 400;
+        line-height: 1.15;
+        letter-spacing: 0.4px;
+        margin-bottom: 0.75rem;
+      }
+
+      .delete-modal-copy {
+        color: var(--text-muted);
+        font-weight: 300;
+        font-size: 0.95rem;
+        margin-bottom: 1.8rem;
+      }
+
+      .delete-modal-copy strong {
+        color: var(--text-primary);
+        font-weight: 500;
+      }
+
+      .delete-modal-actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: 0.75rem;
+      }
+
+      .delete-modal-cancel,
+      .delete-modal-confirm {
+        font-family: inherit;
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        border-radius: 30px;
+        padding: 0.7rem 1.3rem;
+        cursor: pointer;
+      }
+
+      .delete-modal-cancel {
+        background: transparent;
+        color: var(--text-muted);
+        border: 1px solid var(--border-color);
+      }
+
+      .delete-modal-cancel:hover {
+        color: var(--text-primary);
+        border-color: var(--border-hover);
+      }
+
+      .delete-modal-confirm {
+        background: #c25953;
+        color: #0d0d0f;
+        border: 1px solid #c25953;
+      }
+
+      .delete-modal-confirm:hover {
+        box-shadow: 0 0 15px rgba(194, 89, 83, 0.35);
+      }
+
+      body.modal-open {
+        overflow: hidden;
+      }
+
+      @media (max-width: 800px) {
+        .page-header {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .post-card {
+          padding: 2rem;
+        }
+
+        .post-card h2 {
+          font-size: 1.9rem;
+        }
+      }
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+      <header class="page-header">
+        <div>
+          <h1 class="page-title">My Blogs</h1>
+          <p class="page-subtitle">
+            Essays written by {{ user.username }}.
+          </p>
+        </div>
+        <a href="{% url 'create_blog' %}" class="action-btn">Write</a>
+      </header>
+
+      <main class="posts-feed">
+        {% for post in blog %}
+        <article class="post-card">
+          <div class="post-headline-row">
+            <h2><a href="{% url 'article' post.pk %}">{{ post.headline }}</a></h2>
+            <a href="{% url 'edit_blog' post.pk %}" class="btn-edit">Edit</a>
+          </div>
+          <div class="post-meta">
+            <span class="author">{{ post.author }}</span>
+            <span class="dot">•</span>
+            <time datetime="{{ post.published_at|date:'c' }}">
+              {{ post.published_at|date:"M j, Y" }}
+            </time>
+          </div>
+          <div class="post-body">
+            <p>{{ post.body|truncatechars:140 }}</p>
+          </div>
+          <div class="post-footer">
+            <a href="{% url 'article' post.pk %}" class="read-more">
+              Read Essay <span class="arrow">→</span>
+            </a>
+            <form class="delete-form" action="{% url 'delete_blog' post.pk %}" method="post" data-title="{{ post.headline }}">
+              {% csrf_token %}
+              <button type="button" class="btn-delete">Delete <span class="arrow">×</span></button>
+            </form>
+          </div>
+        </article>
+        {% empty %}
+        <div class="empty-feed">
+          <p>You have not published any essays yet.</p>
+          <a href="{% url 'create_blog' %}" class="action-btn">Write your first essay</a>
+        </div>
+        {% endfor %}
+      </main>
+    </div>
+
+    <div class="delete-modal" id="delete-modal" hidden>
+      <div class="delete-modal-backdrop" data-delete-close></div>
+      <div class="delete-modal-card" role="dialog" aria-modal="true" aria-labelledby="delete-modal-title">
+        <p class="delete-modal-kicker">Remove essay</p>
+        <h2 id="delete-modal-title">Delete this essay?</h2>
+        <p class="delete-modal-copy">This permanently removes <strong id="delete-modal-name"></strong> from the journal.</p>
+        <div class="delete-modal-actions">
+          <button type="button" class="delete-modal-cancel" data-delete-close>Cancel</button>
+          <button type="button" class="delete-modal-confirm">Delete</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      (function () {
+        const modal = document.getElementById("delete-modal");
+        if (!modal) return;
+
+        const nameEl = document.getElementById("delete-modal-name");
+        const confirmBtn = modal.querySelector(".delete-modal-confirm");
+        const cancelBtn = modal.querySelector(".delete-modal-cancel");
+        let activeForm = null;
+
+        function openModal(form) {
+          activeForm = form;
+          nameEl.textContent = form.dataset.title || "this essay";
+          modal.hidden = false;
+          document.body.classList.add("modal-open");
+          cancelBtn.focus();
+        }
+
+        function closeModal() {
+          modal.hidden = true;
+          document.body.classList.remove("modal-open");
+          if (activeForm) {
+            const trigger = activeForm.querySelector(".btn-delete");
+            if (trigger) trigger.focus();
+          }
+          activeForm = null;
+        }
+
+        document.querySelectorAll(".delete-form").forEach(function (form) {
+          form.querySelector(".btn-delete").addEventListener("click", function () {
+            openModal(form);
+          });
+        });
+
+        confirmBtn.addEventListener("click", function () {
+          if (activeForm) activeForm.submit();
+        });
+
+        modal.querySelectorAll("[data-delete-close]").forEach(function (el) {
+          el.addEventListener("click", closeModal);
+        });
+
+        document.addEventListener("keydown", function (event) {
+          if (event.key === "Escape" && !modal.hidden) closeModal();
+        });
+      })();
+    </script>
+{% endblock %}

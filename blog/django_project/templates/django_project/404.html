@@ -1,0 +1,65 @@
+{% extends "django_project/base.html" %}
+
+{% block title %}404 — Page Not Found | Lumen{% endblock %}
+
+{% block extra_css %}
+      .error-wrapper {
+        max-width: 680px;
+        width: 100%;
+        margin: 4rem auto;
+        padding: 0 2rem;
+        text-align: center;
+      }
+
+      .error-card {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        padding: 4.5rem 3rem;
+        border-radius: 24px;
+        -webkit-backdrop-filter: blur(12px);
+        backdrop-filter: blur(12px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+      }
+
+      .status-code {
+        font-family: var(--font-display);
+        font-size: 6rem;
+        line-height: 1;
+        color: var(--accent);
+        margin-bottom: 0.5rem;
+        letter-spacing: 2px;
+      }
+
+      .error-title {
+        font-family: var(--font-display);
+        font-size: 2rem;
+        font-weight: 400;
+        margin-bottom: 1rem;
+        letter-spacing: 0.5px;
+      }
+
+      .error-desc {
+        color: var(--text-muted);
+        font-weight: 300;
+        font-size: 0.95rem;
+        margin-bottom: 2.5rem;
+        max-width: 440px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+{% endblock %}
+
+{% block content %}
+    <main class="error-wrapper">
+      <div class="error-card">
+        <div class="status-code">404</div>
+        <h1 class="error-title">Page Not Found</h1>
+        <p class="error-desc">
+          The essay, passage, or route you are looking for has either been relocated or ceased to exist.
+        </p>
+        <a href="{% url 'home' %}" class="action-btn">
+          Return to Journal <span>&rarr;</span>
+        </a>
+      </div>
+    </main>
+{% endblock %}

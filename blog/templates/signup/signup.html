@@ -1,0 +1,124 @@
+{% extends "django_project/base.html" %}
+
+{% block title %}Sign Up — Lumen{% endblock %}
+
+{% block extra_css %}
+.auth-container {
+  max-width: 480px;
+}
+
+input[type="password"] {
+  width: 100%;
+  padding: 1rem 1.2rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  font-family: inherit;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+input[type="password"]:focus {
+  border-color: var(--accent);
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 0 15px var(--accent-glow);
+}
+
+.auth-switch {
+  margin-top: 1.75rem;
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-weight: 300;
+}
+
+.auth-switch a {
+  color: var(--accent);
+  letter-spacing: 0.5px;
+}
+
+.auth-switch a:hover {
+  color: var(--text-primary);
+}
+
+.auth-error {
+  color: #e7b2a1;
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+{% endblock %}
+
+{% block content %}
+    <main class="create-container auth-container">
+        <h1 class="page-title">Join Lumen</h1>
+        <p class="page-subtitle">Create an account to start your journal.</p>
+
+        <div class="editor-card">
+            <form class="editor-form" method="post">
+                {% csrf_token %}
+                {% if error %}<p class="auth-error">{{ error }}</p>{% endif %}
+
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input
+                        type="text"
+                        id="username"
+                        name="username"
+                        placeholder="Choose a username"
+                        autocomplete="username"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="you@example.com"
+                        autocomplete="email"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input
+                        type="password"
+                        id="password"
+                        name="password1"
+                        placeholder="Create a password"
+                        autocomplete="new-password"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="confirm-password">Confirm Password</label>
+                    <input
+                        type="password"
+                        id="confirm-password"
+                        name="password2"
+                        placeholder="Repeat your password"
+                        autocomplete="new-password"
+                        required
+                    >
+                </div>
+
+                <div class="form-actions">
+                    <a href="{% url 'home' %}" class="btn-cancel">Back</a>
+                    <button type="submit" class="btn-publish">
+                        Sign Up <span class="arrow">→</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <p class="auth-switch">
+            Already have an account? <a href="{% url 'login' %}">Log in</a>
+        </p>
+    </main>
+{% endblock %}

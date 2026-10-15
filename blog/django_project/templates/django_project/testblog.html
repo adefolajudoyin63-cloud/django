@@ -1,0 +1,11 @@
+{% if blogs %}
+    {% for blog in blogs %}
+        <h1>{{ blog.headline }}</h1>
+        <p><strong>Author:</strong> {{ blog.author }}</p>
+        <p>{{ blog.body }}</p>
+        {{blog.published_at}}
+        <hr>
+    {% endfor %}
+{% else %}
+    <p>No blog posts available.</p>
+{% endif %}
