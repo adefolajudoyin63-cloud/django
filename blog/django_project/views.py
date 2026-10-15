@@ -4,13 +4,6 @@ from .forms import BlogForm
 from .models import Blog
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
-<<<<<<< HEAD
-#Create your views here
-#Display Hello World
-=======
-from django.contrib.auth import authenticate
-from django.contrib.auth import login as auth_login
->>>>>>> e3eaeebe311e669b2f75d19251302ed3ddb1d217
 
 
 # Create your views here.
@@ -29,11 +22,7 @@ def homepage(request):
 def article(request):
     return render(request, "django_project/article.html")
 
-<<<<<<< HEAD
-@login_required()
-=======
 @login_required
->>>>>>> e3eaeebe311e669b2f75d19251302ed3ddb1d217
 def blog_post(request):
     # Create an empty form
     form = BlogForm()
@@ -73,7 +62,6 @@ def article(request, pk):
         return redirect("/not-found")
 
 
-<<<<<<< HEAD
     
 @login_required()
 def delete_blog(request, pk):
@@ -82,7 +70,7 @@ def delete_blog(request, pk):
     if post is not None:
         if post.author != request.user:
             return HttpResponse("Permission Denied. You;re not the owner of the blog post.", status=403)
-=======
+
 @login_required
 # view blogs belonging to logged in user
 def my_blogs(request):
@@ -102,8 +90,7 @@ def delete_blog(request, pk):
         return redirect("/not-found")
     if post.author != request.user:
         return redirect("/not-found")
->>>>>>> e3eaeebe311e669b2f75d19251302ed3ddb1d217
-    #function to delete from the db
+
     post.delete()
     #redirect to home
     return redirect('home')
@@ -132,12 +119,6 @@ def edit_blog(request, pk):
 
 def not_found(request, exception=None):
     return render(request, "django_project/404.html", status=404)
-
-<<<<<<< HEAD
-# def not_found(request):
-#     return HttpResponse("Not found")
-
-
 
 @login_required()
 def edit_blog(request, pk):
@@ -205,48 +186,3 @@ def profile(request):
     #and assign it to the variable called 'user_posts'
     user_posts = user.blog_set.all()
     return render(request, "registration/profile.html", context={'blogs': user_posts})
-
-=======
-
-
-def login(request):
-    error = None
-    if request.method == "POST":
-        user = authenticate(
-            request,
-            username=request.POST.get("username"),
-            password=request.POST.get("password"),
-        )
-        if user is not None:
-            auth_login(request, user)
-            return redirect("home")
-        error = "Username or password is incorrect."
-    return render(request, "signup/login.html", {"error": error})
-
-
-def register(request):
-    error = None
-    if request.method == "POST":
-        password = request.POST.get("password1", "")
-        confirm_password = request.POST.get("password2", "")
-        if password != confirm_password:
-            error = "Passwords do not match."
-        else:
-            form = UserCreationForm({
-                "username": request.POST.get("username", ""),
-                "password1": password,
-                "password2": confirm_password,
-            })
-            if form.is_valid():
-                user = form.save(commit=False)
-                user.email = request.POST.get("email", "")
-                user.save()
-                auth_login(request, user)
-                return redirect("home")
-            error = " ".join(
-                message
-                for messages in form.errors.values()
-                for message in messages
-            )
-    return render(request, "signup/signup.html", {"error": error})
->>>>>>> e3eaeebe311e669b2f75d19251302ed3ddb1d217
